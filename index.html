@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مركز الأمجاد | عرض المنتجات</title>
+    <style>
+        :root { --primary: #7b1f3a; --bg: #f8f9fa; --dark: #222; }
+        body { font-family: system-ui, sans-serif; background: var(--bg); margin: 0; padding: 0; color: var(--dark); }
+        header { background: var(--primary); color: white; text-align: center; padding: 25px 15px; }
+        header h1 { margin: 0; font-size: 22pt; }
+        .container { max-width: 1000px; margin: 20px auto; padding: 0 15px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .card { background: white; border-radius: 12px; overflow: hidden; border: 1px solid #ddd; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; }
+        .card img { width: 100%; height: 180px; object-fit: cover; background: #eee; }
+        .card-body { padding: 15px; }
+        .card h3 { margin: 0 0 8px 0; font-size: 14pt; }
+        .card p { color: #666; font-size: 10pt; line-height: 1.4; margin-bottom: 10px; }
+        .price { color: var(--primary); font-weight: bold; font-size: 12pt; margin-bottom: 10px; }
+        .wa-btn { display: block; text-align: center; background: #25D366; color: white; text-decoration: none; padding: 10px; border-radius: 6px; font-weight: bold; }
+        
+        footer { text-align: center; padding: 20px; margin-top: 40px; border-top: 1px solid #ddd; font-size: 10pt; color: #888; position: relative; }
+        .lock-btn { position: absolute; left: 15px; bottom: 15px; cursor: pointer; background: none; border: none; font-size: 12pt; opacity: 0.3; }
+        
+        .admin-panel { display: none; background: white; padding: 20px; border-radius: 12px; border: 2px solid var(--primary); margin-bottom: 30px; }
+        .admin-panel input, .admin-panel textarea { width: 100%; padding: 10px; margin: 6px 0; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; }
+        .admin-panel button { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .file-upload { border: 2px dashed var(--primary); padding: 15px; text-align: center; border-radius: 6px; cursor: pointer; margin: 6px 0; background: #faf4f6; color: var(--primary); font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>مركز الأمجاد للطباعة والأفراح</h1>
+        <p>استعرض أحدث منتجاتنا وخدماتنا مباشرة</p>
+    </header>
+
+    <div class="container">
+        <!-- لوحة التحكم المحمية -->
+        <div id="adminPanel" class="admin-panel">
+            <h3>لوحة إدارة السيرفر (إضافة منتج جديد مع صورة)</h3>
+            <input type="text" id="pTitle" placeholder="اسم المنتج أو الخدمة">
+            <textarea id="pDesc" placeholder="تفاصيل ووصف المنتج"></textarea>
+            <input type="number" id="pPrice" placeholder="السعر بالريال (اختياري)">
+            
+            <label class="file-upload">
+                ?? اختر صورة المنتج من جهازك
+                <input type="file" id="pImageFile" accept="image/*" style="display: none;" onchange="previewImage(event)">
+            </label>
+            <div id="imgPreviewText" style="font-size: 9pt; color: green; margin-bottom: 5px;"></div>
+
+            <button onclick="addProduct()">نشر المنتج في الموقع فوراً</button>
+        </div>
+
+        <div id="productsGrid" class="grid"></div>
+    </div>
+
+    <footer>
+        جميع الحقوق محفوظة © 2026 - مركز الأمجاد
+        <button class="lock-btn" onclick="loginAdmin()" title="إدارة">??</button>
+    </footer>
+
+    <script>
+        let token = localStorage.getItem('token') || '';
+        let base64Image = '';
+
+        if(token) document.getElementById('adminPanel').style.display = 'block';
+
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if(!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                base64Image = e.target.result;
+                document.getElementById('imgPreviewText').innerText = '? تم تحميل وصغط الصورة بنجاح وجاهزة للنشر';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function loadProducts() {
+            try {
+                const res = await fetch('/api/products');
+                const data = await res.json();
+                const grid = document.getElementById('productsGrid');
+                grid.innerHTML = '';
+                
+                if(data.length === 0) {
+                    grid.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color:#777;">لا توجد منتجات معروضة حالياً.</p>';
+                    return;
+                }
+
+                data.forEach(p => {
+                    grid.innerHTML += `
+                        <div class="card">
+                            <img src="${p.image_data || 'https://via.placeholder.com/300?text=Amjad'}" alt="${p.title}">
+                            <div class="card-body">
+                                <h3>${p.title}</h3>
+                                <p>${p.description || ''}</p>
+                                <div class="price">${p.price ? p.price + ' ريال' : 'السعر عند الطلب'}</div>
+                                <a href="https://wa.me/96773269355?text=مرحباً، أرغب بطلب هذا المنتج: ${encodeURIComponent(p.title)}" class="wa-btn" target="_blank">اطلب عبر الواتساب</a>
+                                ${token ? `<button onclick="deleteProduct(${p.id})" style="background:red;color:white;border:none;padding:6px;margin-top:10px;width:100%;border-radius:4px;cursor:pointer;">حذف المنتج</button>` : ''}
+                            </div>
+                        </div>
+                    `;
+                });
+            } catch(err) {
+                console.error(err);
+            }
+        }
+
+        async function loginAdmin() {
+            if(token) {
+                if(confirm('هل تريد تسجيل الخروج من لوحة الإدارة؟')) {
+                    localStorage.removeItem('token');
+                    location.reload();
+                }
+                return;
+            }
+            const pass = prompt('أدخل رمز المدير السري:');
+            if(!pass) return;
+
+            const res = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username: 'admin', password: pass })
+            });
+
+            const data = await res.json();
+            if(res.ok) {
+                token = data.token;
+                localStorage.setItem('token', token);
+                document.getElementById('adminPanel').style.display = 'block';
+                alert('تم تسجيل الدخول بنجاح!');
+                loadProducts();
+            } else {
+                alert(data.error || 'كلمة المرور غير صحيحة!');
+            }
+        }
+
+        async function addProduct() {
+            const title = document.getElementById('pTitle').value;
+            const description = document.getElementById('pDesc').value;
+            const price = document.getElementById('pPrice').value;
+
+            if(!title) {
+                alert('يرجى إدخال اسم المنتج على الأقل!');
+                return;
+            }
+
+            const res = await fetch('/api/products', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+                body: JSON.stringify({ 
+                    title, 
+                    description, 
+                    price, 
+                    image_data: base64Image, 
+                    available: 1 
+                })
+            });
+
+            if(res.ok) {
+                alert('تم نشر المنتج وصورته بنجاح!');
+                document.getElementById('pTitle').value = '';
+                document.getElementById('pDesc').value = '';
+                document.getElementById('pPrice').value = '';
+                document.getElementById('pImageFile').value = '';
+                document.getElementById('imgPreviewText').innerText = '';
+                base64Image = '';
+                loadProducts();
+            } else {
+                alert('حدث خطأ أثناء الحفظ!');
+            }
+        }
+
+        async function deleteProduct(id) {
+            if(!confirm('هل أنت متأكد من حذف هذا المنتج نهائياً؟')) return;
+            const res = await fetch('/api/products/' + id, {
+                method: 'DELETE',
+                headers: { 'Authorization': 'Bearer ' + token }
+            });
+            if(res.ok) loadProducts();
+        }
+
+        loadProducts();
+    </script>
+</body>
+</html>
