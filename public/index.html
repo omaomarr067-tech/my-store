@@ -3,188 +3,643 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مركز الأمجاد | عرض المنتجات</title>
+    <title>مركز الأمجاد للطباعة والأفراح</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --primary: #7b1f3a; --bg: #f8f9fa; --dark: #222; }
-        body { font-family: system-ui, sans-serif; background: var(--bg); margin: 0; padding: 0; color: var(--dark); }
-        header { background: var(--primary); color: white; text-align: center; padding: 25px 15px; }
-        header h1 { margin: 0; font-size: 22pt; }
-        .container { max-width: 1000px; margin: 20px auto; padding: 0 15px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
-        .card { background: white; border-radius: 12px; overflow: hidden; border: 1px solid #ddd; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; }
-        .card img { width: 100%; height: 180px; object-fit: cover; background: #eee; }
-        .card-body { padding: 15px; }
-        .card h3 { margin: 0 0 8px 0; font-size: 14pt; }
-        .card p { color: #666; font-size: 10pt; line-height: 1.4; margin-bottom: 10px; }
-        .price { color: var(--primary); font-weight: bold; font-size: 12pt; margin-bottom: 10px; }
-        .wa-btn { display: block; text-align: center; background: #25D366; color: white; text-decoration: none; padding: 10px; border-radius: 6px; font-weight: bold; }
-        
-        footer { text-align: center; padding: 20px; margin-top: 40px; border-top: 1px solid #ddd; font-size: 10pt; color: #888; position: relative; }
-        .lock-btn { position: absolute; left: 15px; bottom: 15px; cursor: pointer; background: none; border: none; font-size: 12pt; opacity: 0.3; }
-        
-        .admin-panel { display: none; background: white; padding: 20px; border-radius: 12px; border: 2px solid var(--primary); margin-bottom: 30px; }
-        .admin-panel input, .admin-panel textarea { width: 100%; padding: 10px; margin: 6px 0; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; }
-        .admin-panel button { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        .file-upload { border: 2px dashed var(--primary); padding: 15px; text-align: center; border-radius: 6px; cursor: pointer; margin: 6px 0; background: #faf4f6; color: var(--primary); font-weight: bold; }
+        :root {
+            --primary-color: #8b1d40;
+            --primary-hover: #6d1532;
+            --accent-color: #d4af37;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-dark: #2c3e50;
+            --text-light: #6c757d;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Top Announcement Bar */
+        .top-banner {
+            background: linear-gradient(90deg, #6d1532, var(--primary-color), #6d1532);
+            color: #fff;
+            text-align: center;
+            padding: 10px 15px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .top-banner i {
+            color: var(--accent-color);
+            margin-left: 8px;
+        }
+
+        /* Header */
+        header {
+            background: var(--card-bg);
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border-bottom: 3px solid var(--accent-color);
+            position: relative;
+        }
+
+        header h1 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        header p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+
+        .admin-trigger-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: transparent;
+            border: 1px solid #ddd;
+            color: var(--text-light);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .admin-trigger-btn:hover {
+            background: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+        }
+
+        /* Admin Action Bar (Visible when logged in) */
+        .admin-control-bar {
+            display: none;
+            background: #fff3cd;
+            border-bottom: 1px solid #ffeeba;
+            padding: 12px 20px;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        .admin-control-bar.active {
+            display: flex;
+        }
+
+        .btn-action {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-action:hover {
+            background: var(--primary-hover);
+        }
+        .btn-danger {
+            background: #dc3545;
+        }
+        .btn-danger:hover {
+            background: #bd2130;
+        }
+
+        /* Container & Products Grid */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        /* Card Design */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #edf2f7;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+
+        .card-img-wrapper {
+            width: 100%;
+            height: 230px;
+            overflow: hidden;
+            background: #f1f5f9;
+            position: relative;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .card:hover .card-img-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .card-description {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .card-price {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .whatsapp-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #25d366;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .whatsapp-btn:hover {
+            background: #1eb956;
+        }
+
+        /* Card Admin Tools */
+        .card-admin-tools {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            gap: 8px;
+        }
+        .admin-logged-in .card-admin-tools {
+            display: flex;
+        }
+
+        .tool-btn {
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: var(--transition);
+        }
+        .tool-btn.edit-btn:hover { background: #ffc107; color: #000; }
+        .tool-btn.delete-btn:hover { background: #dc3545; color: #fff; }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active { display: flex; }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: var(--shadow);
+            position: relative;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 2000;
+        }
+        .toast {
+            background: #333;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: fadeIn 0.3s ease;
+        }
+        .toast.success { background: #28a745; }
+        .toast.error { background: #dc3545; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+            border-top: 3px solid var(--accent-color);
+        }
+        footer p { margin-bottom: 8px; color: #bbb; }
+        footer .thanks-msg { color: var(--accent-color); font-weight: 600; font-size: 1.05rem; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>مركز الأمجاد للطباعة والأفراح</h1>
-        <p>استعرض أحدث منتجاتنا وخدماتنا مباشرة</p>
-    </header>
-
-    <div class="container">
-        <!-- لوحة التحكم المحمية -->
-        <div id="adminPanel" class="admin-panel">
-            <h3>لوحة إدارة السيرفر (إضافة منتج جديد مع صورة)</h3>
-            <input type="text" id="pTitle" placeholder="اسم المنتج أو الخدمة">
-            <textarea id="pDesc" placeholder="تفاصيل ووصف المنتج"></textarea>
-            <input type="number" id="pPrice" placeholder="السعر بالريال (اختياري)">
-            
-            <label class="file-upload">
-                📁 اختر صورة المنتج من جهازك
-                <input type="file" id="pImageFile" accept="image/*" style="display: none;" onchange="previewImage(event)">
-            </label>
-            <div id="imgPreviewText" style="font-size: 9pt; color: green; margin-bottom: 5px;"></div>
-
-            <button onclick="addProduct()">نشر المنتج في الموقع فوراً</button>
-        </div>
-
-        <div id="productsGrid" class="grid"></div>
+    <!-- الشريط الترحيبي والإعلاني الأعلى -->
+    <div class="top-banner">
+        <i class="fas fa-bullhorn"></i> مرحباً بكم في مركز الأمجاد للطباعة والأفراح - أحدث التصاميم والخدمات بين يديك!
     </div>
 
+    <!-- ترويسة الموقع -->
+    <header>
+        <button class="admin-trigger-btn" id="loginBtn" title="تسجيل دخول الإدارة"><i class="fas fa-lock"></i></button>
+        <h1>مركز الأمجاد للطباعة والأفراح</h1>
+        <p>استعرض أحدث منتجاتنا وخدماتنا مباشرة واطلب بنقرة زر</p>
+    </header>
+
+    <!-- شريط التحكم بالإدارة (يظهر بعد تسجيل الدخول) -->
+    <div class="admin-control-bar" id="adminBar">
+        <span><i class="fas fa-user-shield"></i> مرحباً بك، المدير المسؤول</span>
+        <button class="btn-action" id="addNewBtn"><i class="fas fa-plus"></i> إضافة منتج جديد</button>
+        <button class="btn-action btn-danger" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> خروج</button>
+    </div>
+
+    <!-- شبكة عرض المنتجات -->
+    <div class="container">
+        <div class="products-grid" id="productsGrid">
+            <!-- سيتم تحميل المنتجات هنا ديناميكياً -->
+        </div>
+    </div>
+
+    <!-- نافذة تسجيل الدخول المنبثقة -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>تسجيل دخول لوحة التحكم</span>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>اسم المستخدم</label>
+                    <input type="text" id="username" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn-action" style="width: 100%;">دخول</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- نافذة إضافة / تعديل منتج المنبثقة -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="modalTitle">إضافة منتج جديد</span>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="productForm">
+                <input type="hidden" id="productId">
+                <div class="form-group">
+                    <label>اسم المنتج/الخدمة</label>
+                    <input type="text" id="pTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>الوصف</label>
+                    <textarea id="pDesc" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>السعر (مثال: 5000 ريال أو "حسب الطلب")</label>
+                    <input type="text" id="pPrice" required>
+                </div>
+                <div class="form-group">
+                    <label>صورة المنتج</label>
+                    <input type="file" id="pImage" accept="image/*">
+                </div>
+                <button type="submit" class="btn-action" style="width: 100%;">حفظ البيانات</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- الإشعارات المنبثقة التفاعلية -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- التذييل (Footer) -->
     <footer>
-        جميع الحقوق محفوظة © 2026 - مركز الأمجاد
-        <button class="lock-btn" onclick="loginAdmin()" title="إدارة">🔒</button>
+        <p class="thanks-msg">شكراً لزيارتكم مركز الأمجاد للطباعة والأفراح</p>
+        <p>جميع الحقوق محفوظة &copy; 2026 - مركز الأمجاد</p>
     </footer>
 
     <script>
         let token = localStorage.getItem('token') || '';
-        let base64Image = '';
+        let products = [];
 
-        if(token) document.getElementById('adminPanel').style.display = 'block';
+        // Elements
+        const productsGrid = document.getElementById('productsGrid');
+        const adminBar = document.getElementById('adminBar');
+        const loginModal = document.getElementById('loginModal');
+        const productModal = document.getElementById('productModal');
 
-        function previewImage(event) {
-            const file = event.target.files[0];
-            if(!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                base64Image = e.target.result;
-                document.getElementById('imgPreviewText').innerText = '✔ تم تحميل وصغط الصورة بنجاح وجاهزة للنشر';
-            };
-            reader.readAsDataURL(file);
+        // Check Admin state
+        if (token) {
+            document.body.classList.add('admin-logged-in');
+            adminBar.classList.add('active');
         }
 
+        // Show Toast Notification
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // Fetch & Render Products
         async function loadProducts() {
             try {
                 const res = await fetch('/api/products');
-                const data = await res.json();
-                const grid = document.getElementById('productsGrid');
-                grid.innerHTML = '';
-                
-                if(data.length === 0) {
-                    grid.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color:#777;">لا توجد منتجات معروضة حالياً.</p>';
-                    return;
-                }
-
-                data.forEach(p => {
-                    grid.innerHTML += `
-                        <div class="card">
-                            <img src="${p.image_data || 'https://via.placeholder.com/300?text=Amjad'}" alt="${p.title}">
-                            <div class="card-body">
-                                <h3>${p.title}</h3>
-                                <p>${p.description || ''}</p>
-                                <div class="price">${p.price ? p.price + ' ريال' : 'السعر عند الطلب'}</div>
-                                <a href="https://wa.me/96773269355?text=مرحباً، أرغب بطلب هذا المنتج: ${encodeURIComponent(p.title)}" class="wa-btn" target="_blank">اطلب عبر الواتساب</a>
-                                ${token ? `<button onclick="deleteProduct(${p.id})" style="background:red;color:white;border:none;padding:6px;margin-top:10px;width:100%;border-radius:4px;cursor:pointer;">حذف المنتج</button>` : ''}
-                            </div>
-                        </div>
-                    `;
-                });
-            } catch(err) {
-                console.error(err);
+                products = await res.json();
+                renderGrid();
+            } catch (err) {
+                showToast('تعذر تحميل المنتجات', 'error');
             }
         }
 
-        async function loginAdmin() {
-            if(token) {
-                if(confirm('هل تريد تسجيل الخروج من لوحة الإدارة؟')) {
-                    localStorage.removeItem('token');
-                    location.reload();
-                }
+        function renderGrid() {
+            productsGrid.innerHTML = '';
+            if (products.length === 0) {
+                productsGrid.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: #888;">لا توجد منتجات معروضة حالياً.</p>';
                 return;
             }
-            const pass = prompt('أدخل رمز المدير السري:');
-            if(!pass) return;
 
-            const res = await fetch('/api/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username: 'admin', password: pass })
+            products.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-admin-tools">
+                        <button class="tool-btn edit-btn" onclick="openEditModal(${p.id})"><i class="fas fa-edit"></i></button>
+                        <button class="tool-btn delete-btn" onclick="deleteProduct(${p.id})"><i class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="card-img-wrapper">
+                        <img src="${p.image || 'https://via.placeholder.com/300x200?text=لا+توجد+صورة'}" alt="${p.title}">
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div class="card-title">${p.title}</div>
+                            <div class="card-description">${p.description || ''}</div>
+                        </div>
+                        <div>
+                            <div class="card-price">${p.price}</div>
+                            <a href="https://wa.me/?text=${encodeURIComponent('أريد الاستفسار عن: ' + p.title)}" target="_blank" class="whatsapp-btn">
+                                <i class="fab fa-whatsapp"></i> اطلب عبر الواتساب
+                            </a>
+                        </div>
+                    </div>
+                `;
+                productsGrid.appendChild(card);
             });
-
-            const data = await res.json();
-            if(res.ok) {
-                token = data.token;
-                localStorage.setItem('token', token);
-                document.getElementById('adminPanel').style.display = 'block';
-                alert('تم تسجيل الدخول بنجاح!');
-                loadProducts();
-            } else {
-                alert(data.error || 'كلمة المرور غير صحيحة!');
-            }
         }
 
-        async function addProduct() {
+        // Login Flow
+        document.getElementById('loginBtn').onclick = () => loginModal.classList.add('active');
+        document.querySelectorAll('.close-modal').forEach(btn => {
+            btn.onclick = () => {
+                loginModal.classList.remove('active');
+                productModal.classList.remove('active');
+            }
+        });
+
+        document.getElementById('loginForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const res = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({username, password})
+                });
+                const data = await res.json();
+                if (res.ok) {
+                    token = data.token;
+                    localStorage.setItem('token', token);
+                    document.body.classList.add('admin-logged-in');
+                    adminBar.classList.add('active');
+                    loginModal.classList.remove('active');
+                    showToast('تم تسجيل الدخول بنجاح!');
+                } else {
+                    showToast(data.message || 'بيانات الدخول خاطئة', 'error');
+                }
+            } catch(err) {
+                showToast('حدث خطأ في الاتصال', 'error');
+            }
+        };
+
+        // Logout
+        document.getElementById('logoutBtn').onclick = () => {
+            token = '';
+            localStorage.removeItem('token');
+            document.body.classList.remove('admin-logged-in');
+            adminBar.classList.remove('active');
+            showToast('تم تسجيل الخروج');
+        };
+
+        // Add / Edit Modal Controls
+        document.getElementById('addNewBtn').onclick = () => {
+            document.getElementById('productForm').reset();
+            document.getElementById('productId').value = '';
+            document.getElementById('modalTitle').innerText = 'إضافة منتج جديد';
+            productModal.classList.add('active');
+        };
+
+        window.openEditModal = (id) => {
+            const p = products.find(prod => prod.id === id);
+            if (!p) return;
+            document.getElementById('productId').value = p.id;
+            document.getElementById('pTitle').value = p.title;
+            document.getElementById('pDesc').value = p.description || '';
+            document.getElementById('pPrice').value = p.price;
+            document.getElementById('modalTitle').innerText = 'تعديل بيانات المنتج';
+            productModal.classList.add('active');
+        };
+
+        // Form Submit for Add/Edit
+        document.getElementById('productForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('productId').value;
             const title = document.getElementById('pTitle').value;
             const description = document.getElementById('pDesc').value;
             const price = document.getElementById('pPrice').value;
+            const imageFile = document.getElementById('pImage').files[0];
 
-            if(!title) {
-                alert('يرجى إدخال اسم المنتج على الأقل!');
-                return;
+            let base64Image = null;
+            if (imageFile) {
+                base64Image = await new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => resolve(e.target.result);
+                    reader.readAsDataURL(imageFile);
+                });
             }
 
-            const res = await fetch('/api/products', {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token
-                },
-                body: JSON.stringify({ 
-                    title, 
-                    description, 
-                    price, 
-                    image_data: base64Image, 
-                    available: 1 
-                })
-            });
+            const payload = { title, description, price };
+            if (base64Image) payload.image = base64Image;
 
-            if(res.ok) {
-                alert('تم نشر المنتج وصورته بنجاح!');
-                document.getElementById('pTitle').value = '';
-                document.getElementById('pDesc').value = '';
-                document.getElementById('pPrice').value = '';
-                document.getElementById('pImageFile').value = '';
-                document.getElementById('imgPreviewText').innerText = '';
-                base64Image = '';
-                loadProducts();
-            } else {
-                alert('حدث خطأ أثناء الحفظ!');
+            const url = id ? `/api/products/${id}` : '/api/products';
+            const method = id ? 'PUT' : 'POST';
+
+            try {
+                const res = await fetch(url, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (res.ok) {
+                    productModal.classList.remove('active');
+                    showToast(id ? 'تم تعديل المنتج بنجاح!' : 'تمت إضافة المنتج بنجاح!');
+                    loadProducts();
+                } else {
+                    showToast('فشلت العملية، تحقق من صلاحياتك', 'error');
+                }
+            } catch(err) {
+                showToast('خطأ أثناء حفظ البيانات', 'error');
             }
-        }
+        };
 
-        async function deleteProduct(id) {
-            if(!confirm('هل أنت متأكد من حذف هذا المنتج نهائياً؟')) return;
-            const res = await fetch('/api/products/' + id, {
-                method: 'DELETE',
-                headers: { 'Authorization': 'Bearer ' + token }
-            });
-            if(res.ok) loadProducts();
-        }
+        // Delete Product
+        window.deleteProduct = async (id) => {
+            if (!confirm('هل أنت متأكد من حذف هذا المنتج؟')) return;
 
+            try {
+                const res = await fetch(`/api/products/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (res.ok) {
+                    showToast('تم حذف المنتج بنجاح');
+                    loadProducts();
+                } else {
+                    showToast('فشل حذف المنتج', 'error');
+                }
+            } catch(err) {
+                showToast('حدث خطأ في عملية الحذف', 'error');
+            }
+        };
+
+        // Load initially
         loadProducts();
     </script>
 </body>
