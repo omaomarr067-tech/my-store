@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مركز الأمجاد - الطباعة والأفراح الرسمية</title>
+    <title>مركز الأمجاد - للطباعة ومستلزمات الأفراح</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-deep: #1a0312;
-            --primary-burgundy: #4a0e2e;
-            --accent-gold: #d4af37;
-            --accent-gold-light: #f3e5ab;
+            --primary-sky: #0083b0;
+            --secondary-cyan: #00b4db;
+            --dark-navy: #0f172a;
+            --accent-gold: #f59e0b;
             --whatsapp-green: #25d366;
+            --bg-light: #f0fdf4;
             --card-bg: #ffffff;
-            --text-main: #2b2b2b;
-            --shadow-lux: 0 12px 35px rgba(0,0,0,0.12);
+            --text-main: #1e293b;
+            --shadow-lux: 0 10px 30px rgba(0, 131, 176, 0.12);
         }
 
         * {
@@ -25,457 +26,350 @@
         }
 
         body {
-            background-color: #f7f3f5;
+            background-color: #f8fafc;
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* شبكة العز - الشريط المتحرك القوي والسريع */
-        .ezz-ticker {
-            background: linear-gradient(90deg, #111, #3a0022, #111);
-            color: var(--accent-gold-light);
-            padding: 10px 0;
+        /* شريط شبكة العز القابل للإغلاق */
+        .ezz-banner {
+            background: linear-gradient(90deg, #0f172a, #0083b0, #0f172a);
+            color: white;
+            padding: 10px 20px;
             font-size: 0.92rem;
             font-weight: 700;
-            overflow: hidden;
-            white-space: nowrap;
-            border-bottom: 2px solid var(--accent-gold);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
-        .ezz-track {
-            display: inline-block;
-            animation: ezzScroll 18s linear infinite;
-        }
-
-        .ezz-track span {
-            margin: 0 40px;
-            display: inline-flex;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 100;
         }
-
-        .ezz-track i {
-            color: var(--accent-gold);
-        }
-
-        @keyframes ezzScroll {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* الهيدر الفخم */
-        .hero-header {
-            background: linear-gradient(135deg, #4a0e2e 0%, #1a0312 100%);
+        .ezz-banner .close-banner {
+            background: rgba(255,255,255,0.2);
+            border: none;
             color: white;
-            padding: 45px 20px 65px;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+        .ezz-banner .close-banner:hover { background: #e74c3c; }
+
+        /* الهيدر السماوي الفخم */
+        .hero-section {
+            background: linear-gradient(135deg, #005c8a 0%, #0083b0 50%, #00b4db 100%);
+            color: white;
+            padding: 40px 20px 60px;
             text-align: center;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            box-shadow: 0 8px 25px rgba(0, 131, 176, 0.3);
         }
 
-        /* زر الدخول الغامض (مخفي داخل التاج الملكي بدقة) */
-        .secret-crown {
-            width: 85px;
-            height: 85px;
-            background: radial-gradient(circle, #ffe066 0%, #d4af37 100%);
+        /* زر الدخول الغامض عبر شعار المطابع والأعراس */
+        .secret-logo-emblem {
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(circle, #ffffff 0%, #e0f2fe 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 18px;
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
-            border: 3px solid #fff3bf;
+            margin: 0 auto 15px;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
+            border: 3px solid var(--accent-gold);
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s;
         }
-        .secret-crown:hover {
-            transform: scale(1.06);
-        }
-        .secret-crown i {
-            font-size: 42px;
-            color: #2b081b;
-        }
+        .secret-logo-emblem:hover { transform: scale(1.08); }
+        .secret-logo-emblem i { font-size: 40px; color: var(--primary-sky); }
 
         .brand-title {
-            font-size: 2.6rem;
+            font-size: 2.5rem;
             font-weight: 900;
-            letter-spacing: 1.5px;
-            margin-bottom: 10px;
-            text-shadow: 0 3px 12px rgba(0,0,0,0.5);
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         .brand-location {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(8px);
-            padding: 8px 25px;
-            border-radius: 30px;
             font-size: 1rem;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #f3f3f3;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            padding: 6px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 18px;
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
-        .social-links {
+        /* أرقام الواتساب ومستلزمات التواصل تحت العنوان */
+        .contact-numbers-box {
             display: flex;
             justify-content: center;
             gap: 15px;
             flex-wrap: wrap;
+            margin-bottom: 20px;
         }
-
-        .btn-social {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 11px 26px;
-            border-radius: 30px;
-            text-decoration: none;
-            color: white;
-            font-weight: 700;
-            font-size: 1rem;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-            transition: 0.3s;
-        }
-        .btn-social.wa { background: var(--whatsapp-green); color: #002e12; }
-        .btn-social.tk { background: #111; border: 1px solid #444; }
-        .btn-social:hover { transform: translateY(-3px); opacity: 0.95; }
-
-        /* الأقسام والتبويبات */
-        .nav-tabs {
-            max-width: 1200px;
-            margin: -30px auto 35px;
-            padding: 0 20px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .tab-item {
-            background: white;
-            border: 2px solid transparent;
-            padding: 15px 35px;
-            border-radius: 35px;
-            font-size: 1.05rem;
-            font-weight: 800;
-            color: #555;
-            cursor: pointer;
-            box-shadow: var(--shadow-lux);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: 0.3s;
-        }
-        .tab-item.active {
-            background: var(--primary-burgundy);
-            color: white;
-            border-color: var(--accent-gold);
-            box-shadow: 0 10px 30px rgba(74, 14, 46, 0.4);
-        }
-
-        /* شريط تحكم الأدمن */
-        .admin-dashboard-bar {
-            display: none;
-            background: #fff8e1;
-            border: 1px solid #ffe082;
-            max-width: 1200px;
-            margin: 0 auto 25px;
-            padding: 15px 30px;
-            border-radius: 14px;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-        .admin-dashboard-bar.active { display: flex; }
-
-        /* شبكة المنتجات (تدعم كميات ضخمة وصور كثيرة) */
-        .container-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px 70px;
-            flex-grow: 1;
-            width: 100%;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .product-card {
-            background: var(--card-bg);
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: var(--shadow-lux);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #eaeaea;
-        }
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 18px 40px rgba(0,0,0,0.15);
-        }
-
-        .card-img-box {
-            width: 100%;
-            height: 230px;
-            overflow: hidden;
-            background: #f1f1f1;
-        }
-        .card-img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        .product-card:hover .card-img-box img {
-            transform: scale(1.08);
-        }
-
-        .card-content {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            justify-content: space-between;
-        }
-
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: #1a1a1a;
-            margin-bottom: 8px;
-        }
-        .card-desc {
-            font-size: 0.92rem;
-            color: #666;
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-        .card-price {
-            font-size: 1.15rem;
-            font-weight: 900;
-            color: var(--primary-burgundy);
-            margin-bottom: 15px;
-        }
-
-        .card-btn-wa {
+        .wa-pill {
             background: var(--whatsapp-green);
             color: #003816;
             text-decoration: none;
-            padding: 12px;
-            border-radius: 12px;
+            padding: 10px 22px;
+            border-radius: 30px;
             font-weight: 800;
-            text-align: center;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+        .wa-pill:hover { transform: translateY(-3px); background: #1eb956; color: white; }
+
+        .tk-pill {
+            background: #0f172a;
+            color: white;
+            text-decoration: none;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #334155;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+        .tk-pill:hover { transform: translateY(-3px); background: #1e293b; }
+
+        /* تبويبات الأقسام */
+        .nav-tabs {
+            max-width: 1100px;
+            margin: -25px auto 30px;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            position: relative;
+            z-index: 10;
+        }
+        .tab-btn {
+            background: white;
+            border: 2px solid transparent;
+            padding: 14px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 800;
+            color: #475569;
+            cursor: pointer;
+            box-shadow: var(--shadow-lux);
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 10px;
             transition: 0.3s;
         }
-        .card-btn-wa:hover { background: #1eb956; }
+        .tab-btn.active {
+            background: var(--primary-sky);
+            color: white;
+            border-color: var(--accent-gold);
+            box-shadow: 0 8px 25px rgba(0, 131, 176, 0.4);
+        }
 
-        /* أزرار التحكم بالبطاقة للأدمن */
-        .card-admin-ops {
+        /* شريط الأدمن */
+        .admin-bar {
+            display: none;
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            max-width: 1100px;
+            margin: 0 auto 20px;
+            padding: 15px 25px;
+            border-radius: 12px;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .admin-bar.active { display: flex; }
+
+        /* شبكة المنتجات */
+        .main-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+            flex-grow: 1;
+            width: 100%;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lux);
+            transition: 0.3s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #e2e8f0;
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+        .card-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: #f1f5f9;
+        }
+        .card-body {
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+        .card-title { font-size: 1.2rem; font-weight: 800; color: #0f172a; margin-bottom: 6px; }
+        .card-desc { font-size: 0.9rem; color: #64748b; margin-bottom: 12px; line-height: 1.4; }
+        .card-price { font-size: 1.15rem; font-weight: 900; color: var(--primary-sky); margin-bottom: 14px; }
+        
+        .card-ops {
             display: none;
             position: absolute;
-            top: 12px;
-            right: 12px;
-            gap: 8px;
+            top: 10px;
+            right: 10px;
+            gap: 6px;
         }
-        .admin-auth .card-admin-ops { display: flex; }
-
-        .op-action-btn {
+        .admin-auth .card-ops { display: flex; }
+        .op-btn {
             background: rgba(255,255,255,0.95);
             border: none;
-            width: 38px;
-            height: 38px;
+            width: 36px; height: 36px;
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
             color: #333;
             transition: 0.2s;
         }
-        .op-action-btn.edit:hover { background: #ffc107; color: #000; }
-        .op-action-btn.del:hover { background: #e74c3c; color: #fff; }
+        .op-btn.edit:hover { background: #f59e0b; color: white; }
+        .op-btn.del:hover { background: #ef4444; color: white; }
 
-        /* النوافذ المنبثقة (Modals) */
-        .modal-layer {
+        /* النوافذ المنبثقة */
+        .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(5px);
+            background: rgba(0,0,0,0.65);
+            backdrop-filter: blur(4px);
             z-index: 1000;
             align-items: center;
             justify-content: center;
         }
-        .modal-layer.active { display: flex; }
-
-        .modal-container {
+        .modal-overlay.active { display: flex; }
+        .modal-box {
             background: white;
             border-radius: 20px;
-            padding: 30px;
+            padding: 28px;
             width: 90%;
-            max-width: 500px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            max-width: 460px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
-        .modal-container h3 {
-            color: var(--primary-burgundy);
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 1.4rem;
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-        .form-group label {
-            display: block;
-            font-weight: 700;
-            font-size: 0.92rem;
-            margin-bottom: 6px;
-            color: #444;
-        }
+        .modal-box h3 { color: var(--primary-sky); margin-bottom: 18px; text-align: center; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: 700; font-size: 0.9rem; margin-bottom: 5px; }
         .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ccc;
-            border-radius: 12px;
-            font-size: 1rem;
-            outline: none;
-            background: #fafafa;
+            width: 100%; padding: 11px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 0.95rem; outline: none; background: #f8fafc;
         }
-
-        .btn-main {
-            background: var(--primary-burgundy);
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 13px;
-            border-radius: 12px;
-            font-size: 1.05rem;
-            font-weight: 800;
-            cursor: pointer;
-            box-shadow: 0 6px 20px rgba(74, 14, 46, 0.35);
+        .btn-submit {
+            background: var(--primary-sky); color: white; border: none; width: 100%; padding: 12px; border-radius: 10px; font-weight: 800; cursor: pointer; margin-top: 10px;
         }
         .btn-cancel {
-            background: #95a5a6;
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 12px;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 10px;
+            background: #94a3b8; color: white; border: none; width: 100%; padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer; margin-top: 8px;
         }
 
-        /* كبسولة التنبيهات العائمة */
+        /* كبسولة الإشعارات العائمة */
         .toast-pill {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(120px);
-            background: #1a0312;
-            color: #fff;
-            padding: 14px 32px;
-            border-radius: 35px;
-            font-size: 1rem;
-            font-weight: 700;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            border: 2px solid var(--accent-gold);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s;
-            z-index: 2000;
-            opacity: 0;
+            position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: var(--dark-navy); color: white; padding: 12px 28px; border-radius: 30px; font-weight: 700;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 2px solid var(--accent-gold); display: flex; align-items: center; gap: 10px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 2000; opacity: 0;
         }
-        .toast-pill.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
+        .toast-pill.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-        /* الفوتر الفخم */
         footer {
-            background: #111;
-            color: #888;
-            text-align: center;
-            padding: 25px 15px;
-            font-size: 0.95rem;
-            border-top: 4px solid var(--accent-gold);
-            margin-top: auto;
+            background: var(--dark-navy); color: #94a3b8; text-align: center; padding: 25px; font-size: 0.95rem; border-top: 3px solid var(--accent-gold); margin-top: auto;
         }
-        footer strong { color: #fff; }
+        footer strong { color: white; }
     </style>
 </head>
 <body>
 
-    <!-- شريط شبكة العز (سريع وقوي) -->
-    <div class="ezz-ticker">
-        <div class="ezz-track">
-            <span><i class="fas fa-bolt"></i> شبكة العز: تصفح فائق السرعة وأداء قوي بلا حدود ⚡</span>
-            <span><i class="fas fa-crown"></i> مركز الأمجاد للأفراح والطباعة - دقة واحترافية عالية 👑</span>
-            <span><i class="fas fa-shield-alt"></i> حماية وأمان متكامل للطلبات والخدمات التجارية 🛡️</span>
-        </div>
+    <!-- شريط شبكة العز (قابل للإغلاق) -->
+    <div class="ezz-banner" id="ezzBanner">
+        <span><i class="fas fa-bolt"></i> شبكة العز: تصفح فائق السرعة وأداء قوي وآمن ضد الهجمات ⚡</span>
+        <button class="close-banner" onclick="document.getElementById('ezzBanner').style.display='none'" title="إخفاء الشريط">✖</button>
     </div>
 
-    <!-- الهيدر والتاج الملكي مع زر الدخول الغامض -->
-    <div class="hero-header">
-        <!-- ضغطة مزدوجة أو مطولة على التاج تفتح نافذة الإدارة بشكل غامض تماماً -->
-        <div class="secret-crown" id="secretCrownBtn" title="مركز الأمجاد الرسمي">
-            <i class="fas fa-crown"></i>
+    <!-- الهيدر الرئيسي مع الشعار والروابط -->
+    <div class="hero-section">
+        <!-- ضغطة ثلاثية سريعة على الشعار لفتح لوحة التحكم بشكل غامض وآمن -->
+        <div class="secret-logo-emblem" id="secretLogoBtn" title="مركز الأمجاد">
+            <i class="fas fa-print"></i>
         </div>
         <h1 class="brand-title">مركز الأمجاد</h1>
         <div class="brand-location">
             <i class="fas fa-map-marker-alt"></i> شرعب الرونة - المعشار - مقابل معرض الإخوة
         </div>
-        <div class="social-links">
-            <a href="https://wa.me/" class="btn-social wa" target="_blank">
-                <i class="fab fa-whatsapp"></i> واتساب مباشر
+        
+        <!-- أرقام الواتساب المعتمدة وتيك توك تحت العنوان -->
+        <div class="contact-numbers-box">
+            <a href="https://wa.me/967773269355" class="wa-pill" target="_blank">
+                <i class="fab fa-whatsapp"></i> واتساب (1): 773269355
             </a>
-            <a href="#" class="btn-social tk">
-                <i class="fab fa-tiktok"></i> تيك توك
+            <a href="https://wa.me/967712442110" class="wa-pill" target="_blank">
+                <i class="fab fa-whatsapp"></i> واتساب (2): 712442110
+            </a>
+            <a href="https://www.tiktok.com/@badri4726829198260" class="tk-pill" target="_blank">
+                <i class="fab fa-tiktok"></i> تيك توك الرسمي
             </a>
         </div>
     </div>
 
     <!-- تبويبات الأقسام -->
     <div class="nav-tabs">
-        <button class="tab-item active" onclick="switchTab('wedding')">
+        <button class="tab-btn active" onclick="switchCategory('wedding')">
             <i class="fas fa-ring"></i> مستلزمات الأفراح
         </button>
-        <button class="tab-item" onclick="switchTab('office')">
+        <button class="tab-btn" onclick="switchCategory('office')">
             <i class="fas fa-print"></i> الأدوات المكتبية والطباعة
         </button>
     </div>
 
-    <!-- شريط الإدارة الخاص بالمدير -->
-    <div class="admin-dashboard-bar" id="adminBar">
-        <span><i class="fas fa-user-shield"></i> لوحة تحكم الإدارة مفعلة (إدارة أكثر من 50 منتج وصورة بكفاءة عالية)</span>
+    <!-- شريط تحكم الأدمن -->
+    <div class="admin-bar" id="adminBar">
+        <span><i class="fas fa-shield-alt"></i> لوحة التحكم محمية وآمنة بالكامل (إدارة غير محدودة للصور)</span>
         <div style="display: flex; gap: 10px;">
-            <button class="tab-item active" style="padding: 10px 22px; font-size: 0.9rem;" onclick="openProductModal()">+ إضافة منتج جديد</button>
-            <button class="tab-item" style="padding: 10px 22px; font-size: 0.9rem; background: #e74c3c; color: white;" onclick="adminLogout()">خروج 🔒</button>
+            <button class="tab-btn active" style="padding: 10px 20px; font-size: 0.9rem;" onclick="openAddModal()">+ إضافة منتج جديد</button>
+            <button class="tab-btn" style="padding: 10px 20px; font-size: 0.9rem; background: #ef4444; color: white;" onclick="logout()">خروج 🔒</button>
         </div>
     </div>
 
     <!-- شبكة عرض المنتجات -->
-    <div class="container-grid">
+    <div class="main-container">
         <div class="products-grid" id="productsGrid"></div>
     </div>
 
-    <!-- نافذة تسجيل الدخول الغامضة -->
-    <div class="modal-layer" id="loginModal">
-        <div class="modal-container">
+    <!-- نافذة تسجيل الدخول الآمنة -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-box">
             <h3>تسجيل دخول الإدارة المحمي 🔒</h3>
             <form id="loginForm">
                 <div class="form-group">
@@ -486,43 +380,53 @@
                     <label>كلمة المرور</label>
                     <input type="password" id="loginPass" required>
                 </div>
-                <button type="submit" class="btn-main">دخول النظام</button>
-                <button type="button" class="btn-cancel" onclick="closeAllModals()">إلغاء</button>
+                <button type="submit" class="btn-submit">دخول النظام</button>
+                <button type="button" class="btn-cancel" onclick="closeModals()">إلغاء</button>
             </form>
         </div>
     </div>
 
-    <!-- نافذة إضافة أو تعديل منتج (تستوعب صور ضخمة وبكميات مفتوحة) -->
-    <div class="modal-layer" id="productModal">
-        <div class="modal-container">
-            <h3 id="productModalTitle">إضافة منتج جديد</h3>
+    <!-- نافذة إضافة وتعديل المنتجات (تدعم العملات: يمني، سعودي، دولار) -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-box">
+            <h3 id="modalTitle">إضافة منتج جديد</h3>
             <form id="productForm">
-                <input type="hidden" id="editProductId">
+                <input type="hidden" id="pId">
                 <div class="form-group">
                     <label>القسم</label>
-                    <select id="productCategory">
+                    <select id="pCat">
                         <option value="wedding">مستلزمات الأفراح</option>
                         <option value="office">الأدوات المكتبية والطباعة</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>اسم المنتج / الخدمة</label>
-                    <input type="text" id="productTitle" required>
+                    <input type="text" id="pTitle" required>
+                </div>
+                <div class="form-group" style="display: flex; gap: 10px;">
+                    <div style="flex: 2;">
+                        <label>السعر</label>
+                        <input type="text" id="pPrice" placeholder="مثال: 5000 أو السعر عند الطلب">
+                    </div>
+                    <div style="flex: 1;">
+                        <label>العملة</label>
+                        <select id="pCurr">
+                            <option value="YER">ريال يمني (YER)</option>
+                            <option value="SAR">ريال سعودي (SAR)</option>
+                            <option value="USD">دولار ($)</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label>السعر (ر.س أو تفاصيل السعر)</label>
-                    <input type="text" id="productPrice" placeholder="مثال: 5000 أو السعر عند الطلب">
+                    <label>الوصف</label>
+                    <textarea id="pDesc" rows="2"></textarea>
                 </div>
                 <div class="form-group">
-                    <label>الوصف التفصيلي</label>
-                    <textarea id="productDesc" rows="3"></textarea>
+                    <label>صورة المنتج (حفظ دائم في قاعدة البيانات)</label>
+                    <input type="file" id="pImageFile" accept="image/*">
                 </div>
-                <div class="form-group">
-                    <label>صورة المنتج (جودة عالية - حفظ دائم في قاعدة البيانات)</label>
-                    <input type="file" id="productImageFile" accept="image/*">
-                </div>
-                <button type="submit" class="btn-main" id="productSubmitBtn">حفظ المنتج</button>
-                <button type="button" class="btn-cancel" onclick="closeAllModals()">إغلاق</button>
+                <button type="submit" class="btn-submit" id="submitBtn">حفظ ونشر</button>
+                <button type="button" class="btn-cancel" onclick="closeModals()">إغلاق</button>
             </form>
         </div>
     </div>
@@ -535,78 +439,78 @@
 
     <!-- الفوتر -->
     <footer>
-        جميع الحقوق محفوظة &copy; 2026 <strong>مركز الأمجاد - شرعب الرونة</strong> | بدعم من شبكة العز السريعة
+        أهلاً بوجودكم.. وأفراحكم أجمل معنا <strong>مركز الأمجاد - شرعب الرونة</strong> | حماية فائقة بواسطة شبكة العز
     </footer>
 
     <script>
-        let authToken = localStorage.getItem('token') || '';
-        let activeCategory = 'wedding';
-        let itemsList = [];
+        let token = localStorage.getItem('token') || '';
+        let currentCat = 'wedding';
+        let productsData = [];
 
-        if (authToken) {
-            document.body.classList.add('admin-auth');
-        }
+        if (token) document.body.classList.add('admin-auth');
 
-        function triggerToast(msg, isError = false) {
+        function showToast(msg, isError = false) {
             const pill = document.getElementById('toastPill');
             document.getElementById('toastMsg').innerText = msg;
             document.getElementById('toastIcon').className = isError ? 'fas fa-exclamation-triangle' : 'fas fa-check-circle';
-            pill.style.borderColor = isError ? '#e74c3c' : 'var(--accent-gold)';
+            pill.style.borderColor = isError ? '#ef4444' : 'var(--accent-gold)';
             pill.classList.add('show');
             setTimeout(() => pill.classList.remove('show'), 3500);
         }
 
-        async function loadData() {
+        async function fetchProducts() {
             try {
-                const response = await fetch('/api/products');
-                itemsList = await response.json();
-                renderProducts();
-            } catch (err) {
-                triggerToast('حدث خطأ أثناء تحميل البيانات', true);
+                const res = await fetch('/api/products');
+                productsData = await res.json();
+                renderGrid();
+            } catch(e) {
+                showToast('خطأ في جلب البيانات', true);
             }
         }
 
-        function switchTab(cat) {
-            activeCategory = cat;
-            document.querySelectorAll('.tab-item').forEach((tab, index) => {
-                tab.classList.toggle('active', (cat === 'wedding' && index === 0) || (cat === 'office' && index === 1));
+        function switchCategory(cat) {
+            currentCat = cat;
+            document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
+                btn.classList.toggle('active', (cat === 'wedding' && idx === 0) || (cat === 'office' && idx === 1));
             });
-            renderProducts();
+            renderGrid();
         }
 
-        function renderProducts() {
+        function renderGrid() {
             const grid = document.getElementById('productsGrid');
             grid.innerHTML = '';
+            const filtered = productsData.filter(p => (p.category || 'wedding') === currentCat);
 
-            const filtered = itemsList.filter(item => (item.category || 'wedding') === activeCategory);
-
-            if (filtered.length === 0) {
-                grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 50px; color: #888;">
-                    <i class="fas fa-folder-open" style="font-size: 45px; margin-bottom: 12px; color: #d4af37;"></i>
-                    <p style="font-size: 1.1rem; font-weight: 600;">لا توجد منتجات مضافة في هذا القسم حالياً</p>
+            if(filtered.length === 0) {
+                grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 45px; color: #64748b;">
+                    <i class="fas fa-box-open" style="font-size: 40px; margin-bottom: 10px; color: var(--primary-sky);"></i>
+                    <p style="font-weight: 700;">لا توجد منتجات في هذا القسم حالياً</p>
                 </div>`;
                 return;
             }
 
-            filtered.forEach(item => {
+            filtered.forEach(p => {
+                let currencySymbol = 'ريال يمني';
+                if(p.currency === 'SAR') currencySymbol = 'ريال سعودي';
+                if(p.currency === 'USD') currencySymbol = 'دولار';
+                const priceText = p.price ? `${p.price} ${currencySymbol}` : 'السعر عند الطلب';
+
                 const card = document.createElement('div');
                 card.className = 'product-card';
                 card.innerHTML = `
-                    <div class="card-admin-ops">
-                        <button class="op-action-btn edit" onclick="openEditModal(${item.id})"><i class="fas fa-pen"></i></button>
-                        <button class="op-action-btn del" onclick="deleteItem(${item.id})"><i class="fas fa-trash"></i></button>
+                    <div class="card-ops">
+                        <button class="op-btn edit" onclick="openEditModal(${p.id})"><i class="fas fa-pen"></i></button>
+                        <button class="op-btn del" onclick="deleteProduct(${p.id})"><i class="fas fa-trash"></i></button>
                     </div>
-                    <div class="card-img-box">
-                        <img src="${item.image || 'https://via.placeholder.com/300x200?text=مركز+الأمجاد'}" alt="${item.title}">
-                    </div>
-                    <div class="card-content">
+                    <img class="card-img" src="${p.image || 'https://via.placeholder.com/300x200?text=مركز+الأمجاد'}" alt="${p.title}">
+                    <div class="card-body">
                         <div>
-                            <div class="card-title">${item.title}</div>
-                            <div class="card-desc">${item.description || ''}</div>
+                            <div class="card-title">${p.title}</div>
+                            <div class="card-desc">${p.description || ''}</div>
                         </div>
                         <div>
-                            <div class="card-price">${item.price || 'السعر عند الطلب'}</div>
-                            <a href="https://wa.me/?text=${encodeURIComponent('السلام عليكم، أريد الاستفسار عن المنتج: ' + item.title)}" target="_blank" class="card-btn-wa">
+                            <div class="card-price">${priceText}</div>
+                            <a href="https://wa.me/967773269355?text=${encodeURIComponent('السلام عليكم، أريد الاستفسار عن: ' + p.title)}" target="_blank" class="wa-pill" style="width:100%; justify-content:center;">
                                 <i class="fab fa-whatsapp"></i> اطلب عبر الواتساب
                             </a>
                         </div>
@@ -616,25 +520,25 @@
             });
         }
 
-        /* نظام الدخول الغامض عبر التاج الملكي */
-        let crownClicks = 0;
-        let crownTimer = null;
-        document.getElementById('secretCrownBtn').onclick = () => {
-            crownClicks++;
-            clearTimeout(crownTimer);
-            if (crownClicks >= 3) {
-                crownClicks = 0;
-                if (authToken) {
+        /* نظام الدخول الغامض بـ 3 نقرات على الشعار */
+        let clicks = 0;
+        let timer = null;
+        document.getElementById('secretLogoBtn').onclick = () => {
+            clicks++;
+            clearTimeout(timer);
+            if(clicks >= 3) {
+                clicks = 0;
+                if(token) {
                     document.getElementById('adminBar').classList.toggle('active');
                 } else {
                     document.getElementById('loginModal').classList.add('active');
                 }
             } else {
-                crownTimer = setTimeout(() => { crownClicks = 0; }, 1000);
+                timer = setTimeout(() => { clicks = 0; }, 1000);
             }
         };
 
-        function closeAllModals() {
+        function closeModals() {
             document.getElementById('loginModal').classList.remove('active');
             document.getElementById('productModal').classList.remove('active');
         }
@@ -651,70 +555,72 @@
                     body: JSON.stringify({username, password})
                 });
                 const data = await res.json();
-                if (res.ok) {
-                    authToken = data.token;
-                    localStorage.setItem('token', authToken);
+                if(res.ok) {
+                    token = data.token;
+                    localStorage.setItem('token', token);
                     document.body.classList.add('admin-auth');
                     document.getElementById('adminBar').classList.add('active');
-                    closeAllModals();
-                    triggerToast('مرحباً بك، تم تسجيل الدخول بنجاح 🔓');
+                    closeModals();
+                    showToast('تم تسجيل الدخول بنجاح وتفعيل لوحة الإدارة 🔓');
                 } else {
-                    triggerToast(data.message || 'بيانات الدخول خاطئة', true);
+                    showToast(data.message || 'بيانات الدخول غير صحيحة', true);
                 }
-            } catch (err) {
-                triggerToast('فشل الاتصال بالخادم', true);
+            } catch(e) {
+                showToast('خطأ في الاتصال بالخادم', true);
             }
         };
 
-        function adminLogout() {
-            authToken = '';
+        function logout() {
+            token = '';
             localStorage.removeItem('token');
             document.body.classList.remove('admin-auth');
             document.getElementById('adminBar').classList.remove('active');
-            triggerToast('تم تسجيل الخروج وإقفال اللوحة 🔒');
+            showToast('تم تسجيل الخروج وقفل النظام 🔒');
         }
 
-        function openProductModal() {
+        function openAddModal() {
             document.getElementById('productForm').reset();
-            document.getElementById('editProductId').value = '';
-            document.getElementById('productModalTitle').innerText = 'إضافة منتج جديد';
-            document.getElementById('productSubmitBtn').innerText = 'حفظ ونشر المنتج';
+            document.getElementById('pId').value = '';
+            document.getElementById('modalTitle').innerText = 'إضافة منتج جديد';
+            document.getElementById('submitBtn').innerText = 'حفظ ونشر';
             document.getElementById('productModal').classList.add('active');
         }
 
         function openEditModal(id) {
-            const item = itemsList.find(p => p.id === id);
-            if (!item) return;
-            document.getElementById('editProductId').value = item.id;
-            document.getElementById('productCategory').value = item.category || 'wedding';
-            document.getElementById('productTitle').value = item.title;
-            document.getElementById('productPrice').value = item.price || '';
-            document.getElementById('productDesc').value = item.description || '';
-            document.getElementById('productModalTitle').innerText = 'تعديل بيانات المنتج';
-            document.getElementById('productSubmitBtn').innerText = 'حفظ التعديلات';
+            const p = productsData.find(item => item.id === id);
+            if(!p) return;
+            document.getElementById('pId').value = p.id;
+            document.getElementById('pCat').value = p.category || 'wedding';
+            document.getElementById('pTitle').value = p.title;
+            document.getElementById('pPrice').value = p.price || '';
+            document.getElementById('pCurr').value = p.currency || 'YER';
+            document.getElementById('pDesc').value = p.description || '';
+            document.getElementById('modalTitle').innerText = 'تعديل بيانات المنتج';
+            document.getElementById('submitBtn').innerText = 'حفظ التعديلات';
             document.getElementById('productModal').classList.add('active');
         }
 
         document.getElementById('productForm').onsubmit = async (e) => {
             e.preventDefault();
-            const id = document.getElementById('editProductId').value;
-            const category = document.getElementById('productCategory').value;
-            const title = document.getElementById('productTitle').value;
-            const price = document.getElementById('productPrice').value;
-            const description = document.getElementById('productDesc').value;
-            const fileInput = document.getElementById('productImageFile').files[0];
+            const id = document.getElementById('pId').value;
+            const category = document.getElementById('pCat').value;
+            const title = document.getElementById('pTitle').value;
+            const price = document.getElementById('pPrice').value;
+            const currency = document.getElementById('pCurr').value;
+            const description = document.getElementById('pDesc').value;
+            const file = document.getElementById('pImageFile').files[0];
 
-            let base64Image = null;
-            if (fileInput) {
-                base64Image = await new Promise((resolve) => {
+            let image = null;
+            if(file) {
+                image = await new Promise(r => {
                     const reader = new FileReader();
-                    reader.onload = (e) => resolve(e.target.result);
-                    reader.readAsDataURL(fileInput);
+                    reader.onload = ev => r(ev.target.result);
+                    reader.readAsDataURL(file);
                 });
             }
 
-            const payload = { category, title, price, description };
-            if (base64Image) payload.image = base64Image;
+            const body = { category, title, price, currency, description };
+            if(image) body.image = image;
 
             const method = id ? 'PUT' : 'POST';
             const url = id ? `/api/products/${id}` : '/api/products';
@@ -724,42 +630,39 @@
                     method: method,
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${authToken}`
+                        'Authorization': `Bearer ${token}`
                     },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify(body)
                 });
-
-                if (res.ok) {
-                    closeAllModals();
-                    triggerToast(id ? 'تم تعديل المنتج بنجاح' : 'تمت إضافة المنتج ونشره بنجاح');
-                    loadData();
+                if(res.ok) {
+                    closeModals();
+                    showToast(id ? 'تم تعديل المنتج بنجاح' : 'تمت إضافة المنتج ونشره بنجاح');
+                    fetchProducts();
                 } else {
-                    triggerToast('فشلت العملية، تحقق من صلاحياتك', true);
+                    showToast('فشلت العملية، تأكد من الصلاحيات', true);
                 }
-            } catch (err) {
-                triggerToast('حدث خطأ أثناء رفع البيانات', true);
+            } catch(e) {
+                showToast('خطأ في حفظ البيانات', true);
             }
         };
 
-        async function deleteItem(id) {
-            if (!confirm('هل أنت متأكد من حذف هذا المنتج نهائياً؟')) return;
+        async function deleteProduct(id) {
+            if(!confirm('هل أنت متأكد من حذف هذا المنتج نهائياً؟')) return;
             try {
                 const res = await fetch(`/api/products/${id}`, {
                     method: 'DELETE',
-                    headers: { 'Authorization': `Bearer ${authToken}` }
+                    headers: {'Authorization': `Bearer ${token}`}
                 });
-                if (res.ok) {
-                    triggerToast('تم حذف المنتج بنجاح');
-                    loadData();
-                } else {
-                    triggerToast('فشل حذف المنتج', true);
+                if(res.ok) {
+                    showToast('تم حذف المنتج بنجاح');
+                    fetchProducts();
                 }
-            } catch (err) {
-                triggerToast('خطأ في الاتصال أثناء الحذف', true);
+            } catch(e) {
+                showToast('خطأ أثناء عملية الحذف', true);
             }
         }
 
-        loadData();
+        fetchProducts();
     </script>
 </body>
 </html>
