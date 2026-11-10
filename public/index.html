@@ -17,150 +17,64 @@
             --shadow-lux: 0 10px 30px rgba(0, 131, 176, 0.12);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f8fafc; color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
 
-        body {
-            background-color: #f8fafc;
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* 1. الشريط الترحيبي العلوي المتحرك */
         .welcome-ticker {
             background: linear-gradient(90deg, #005c8a, #0083b0, #005c8a);
-            color: #fff;
-            padding: 8px 0;
-            font-size: 0.95rem;
-            font-weight: 700;
-            overflow: hidden;
-            white-space: nowrap;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
+            color: #fff; padding: 8px 0; font-size: 0.95rem; font-weight: 700; overflow: hidden; white-space: nowrap; border-bottom: 1px solid rgba(255,255,255,0.2);
         }
-        .ticker-track {
-            display: inline-block;
-            animation: tickerScroll 20s linear infinite;
-        }
+        .ticker-track { display: inline-block; animation: tickerScroll 20s linear infinite; }
         .ticker-track span { margin: 0 30px; }
-        @keyframes tickerScroll {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
+        @keyframes tickerScroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        /* 2. شريط شبكة العز القابل للإغلاق (تحت الشريط الترحيبي) */
         .ezz-banner {
-            background: #0f172a;
-            color: var(--accent-gold);
-            padding: 9px 20px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid var(--accent-gold);
-            z-index: 99;
+            background: #0f172a; color: var(--accent-gold); padding: 9px 20px; font-size: 0.9rem; font-weight: 700; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--accent-gold); z-index: 99;
         }
         .ezz-banner .close-banner {
-            background: rgba(255,255,255,0.15);
-            border: none;
-            color: white;
-            width: 24px; height: 24px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            transition: 0.2s;
+            background: rgba(255,255,255,0.15); border: none; color: white; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s;
         }
         .ezz-banner .close-banner:hover { background: #ef4444; }
 
-        /* الهيدر السماوي الفخم */
         .hero-section {
             background: linear-gradient(135deg, #005c8a 0%, #0083b0 50%, #00b4db 100%);
-            color: white;
-            padding: 35px 20px 55px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 8px 25px rgba(0, 131, 176, 0.3);
+            color: white; padding: 35px 20px 55px; text-align: center; position: relative; box-shadow: 0 8px 25px rgba(0, 131, 176, 0.3);
         }
 
-        /* زر الدخول الغامض بـ 3 نقرات على الشعار */
         .secret-logo-emblem {
-            width: 85px; height: 85px;
-            background: radial-gradient(circle, #ffffff 0%, #e0f2fe 100%);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 15px;
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
-            border: 3px solid var(--accent-gold);
-            cursor: pointer;
-            transition: transform 0.3s;
+            width: 85px; height: 85px; background: radial-gradient(circle, #ffffff 0%, #e0f2fe 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; box-shadow: 0 0 25px rgba(255, 255, 255, 0.5); border: 3px solid var(--accent-gold); cursor: pointer; transition: transform 0.3s;
         }
         .secret-logo-emblem:hover { transform: scale(1.08); }
         .secret-logo-emblem i { font-size: 38px; color: var(--primary-sky); }
 
-        .brand-title {
-            font-size: 2.4rem; font-weight: 900; margin-bottom: 8px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-        .brand-location {
-            font-size: 0.95rem; background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(5px); padding: 6px 20px; border-radius: 20px;
-            display: inline-block; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.3);
-        }
+        .brand-title { font-size: 2.4rem; font-weight: 900; margin-bottom: 8px; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        .brand-location { font-size: 0.95rem; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(5px); padding: 6px 20px; border-radius: 20px; display: inline-block; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.3); }
 
-        /* أرقام الواتساب وتيك توك المعتمدة */
-        .contact-numbers-box {
-            display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px;
-        }
+        .contact-numbers-box { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
         .wa-pill {
-            background: var(--whatsapp-green); color: #003816; text-decoration: none;
-            padding: 9px 20px; border-radius: 30px; font-weight: 800; font-size: 0.9rem;
-            display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s;
+            background: var(--whatsapp-green); color: #003816; text-decoration: none; padding: 9px 20px; border-radius: 30px; font-weight: 800; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s;
         }
         .wa-pill:hover { transform: translateY(-3px); background: #1eb956; color: white; }
         .tk-pill {
-            background: #0f172a; color: white; text-decoration: none;
-            padding: 9px 20px; border-radius: 30px; font-weight: 800; font-size: 0.9rem;
-            display: inline-flex; align-items: center; gap: 8px; border: 1px solid #334155;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s;
+            background: #0f172a; color: white; text-decoration: none; padding: 9px 20px; border-radius: 30px; font-weight: 800; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; border: 1px solid #334155; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s;
         }
         .tk-pill:hover { transform: translateY(-3px); background: #1e293b; }
 
-        /* تبويبات الأقسام */
-        .nav-tabs {
-            max-width: 1100px; margin: -25px auto 30px; padding: 0 20px;
-            display: flex; justify-content: center; gap: 15px; position: relative; z-index: 10;
-        }
+        .nav-tabs { max-width: 1100px; margin: -25px auto 30px; padding: 0 20px; display: flex; justify-content: center; gap: 15px; position: relative; z-index: 10; }
         .tab-btn {
-            background: white; border: 2px solid transparent; padding: 14px 30px;
-            border-radius: 30px; font-size: 1rem; font-weight: 800; color: #475569;
-            cursor: pointer; box-shadow: var(--shadow-lux); display: flex; align-items: center; gap: 10px; transition: 0.3s;
+            background: white; border: 2px solid transparent; padding: 14px 30px; border-radius: 30px; font-size: 1rem; font-weight: 800; color: #475569; cursor: pointer; box-shadow: var(--shadow-lux); display: flex; align-items: center; gap: 10px; transition: 0.3s;
         }
-        .tab-btn.active {
-            background: var(--primary-sky); color: white; border-color: var(--accent-gold);
-            box-shadow: 0 8px 25px rgba(0, 131, 176, 0.4);
-        }
+        .tab-btn.active { background: var(--primary-sky); color: white; border-color: var(--accent-gold); box-shadow: 0 8px 25px rgba(0, 131, 176, 0.4); }
 
-        /* شريط الأدمن (مع خروج وخروج نهائي) */
         .admin-bar {
-            display: none; background: #fffbeb; border: 1px solid #fde68a;
-            max-width: 1100px; margin: 0 auto 20px; padding: 15px 25px;
-            border-radius: 12px; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+            display: none; background: #fffbeb; border: 1px solid #fde68a; max-width: 1100px; margin: 0 auto 20px; padding: 15px 25px; border-radius: 12px; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
         }
         .admin-bar.active { display: flex; }
 
-        /* شبكة المنتجات */
         .main-container { max-width: 1100px; margin: 0 auto; padding: 0 20px 60px; flex-grow: 1; width: 100%; }
         .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
         .product-card {
-            background: white; border-radius: 16px; overflow: hidden;
-            box-shadow: var(--shadow-lux); transition: 0.3s; position: relative;
-            display: flex; flex-direction: column; border: 1px solid #e2e8f0;
+            background: white; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-lux); transition: 0.3s; position: relative; display: flex; flex-direction: column; border: 1px solid #e2e8f0;
         }
         .product-card:hover { transform: translateY(-6px); box-shadow: 0 15px 35px rgba(0,0,0,0.12); }
         .card-img { width: 100%; height: 220px; object-fit: cover; background: #f1f5f9; }
@@ -172,22 +86,17 @@
         .card-ops { display: none; position: absolute; top: 10px; right: 10px; gap: 6px; }
         .admin-auth .card-ops { display: flex; }
         .op-btn {
-            background: rgba(255,255,255,0.95); border: none; width: 36px; height: 36px;
-            border-radius: 50%; cursor: pointer; box-shadow: 0 3px 10px rgba(0,0,0,0.2); color: #333; transition: 0.2s;
+            background: rgba(255,255,255,0.95); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; box-shadow: 0 3px 10px rgba(0,0,0,0.2); color: #333; transition: 0.2s;
         }
         .op-btn.edit:hover { background: #f59e0b; color: white; }
         .op-btn.del:hover { background: #ef4444; color: white; }
 
-        /* النوافذ المنبثقة الشاملة (الشاشة التعريفية عند الدخول + الإدارة) */
         .modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 1000;
-            align-items: center; justify-content: center;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 1000; align-items: center; justify-content: center;
         }
         .modal-overlay.active { display: flex; }
         .modal-box {
-            background: white; border-radius: 20px; padding: 30px;
-            width: 90%; max-width: 480px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            background: white; border-radius: 20px; padding: 30px; width: 90%; max-width: 480px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
         .modal-box h3 { color: var(--primary-sky); margin-bottom: 15px; text-align: center; }
         .form-group { margin-bottom: 15px; }
@@ -202,7 +111,6 @@
             background: #94a3b8; color: white; border: none; width: 100%; padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer; margin-top: 8px;
         }
 
-        /* كبسولة الإشعارات العائمة */
         .toast-pill {
             position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%) translateY(100px);
             background: var(--dark-navy); color: white; padding: 12px 28px; border-radius: 30px; font-weight: 700;
@@ -219,7 +127,6 @@
 </head>
 <body>
 
-    <!-- 1. الشريط الترحيبي العلوي المتحرك -->
     <div class="welcome-ticker">
         <div class="ticker-track">
             <span>✨ أهلاً بوجودكم في مركز الأمجاد للطباعة ومستلزمات الأفراح - حيث تبدأ البدايات الجميلة ✨</span>
@@ -227,13 +134,11 @@
         </div>
     </div>
 
-    <!-- 2. شريط شبكة العز (قابل للاستخدام والإزالة من المستخدم) -->
     <div class="ezz-banner" id="ezzBanner">
         <span><i class="fas fa-bolt"></i> شبكة العز: تصفح فائق السرعة وأداء قوي وآمن ضد الهجمات السيبرانية ⚡</span>
         <button class="close-banner" onclick="document.getElementById('ezzBanner').style.display='none'" title="إخفاء الشريط">✖</button>
     </div>
 
-    <!-- الهيدر الرئيسي والشعار -->
     <div class="hero-section">
         <div class="secret-logo-emblem" id="secretLogoBtn" title="مركز الأمجاد">
             <i class="fas fa-print"></i>
@@ -243,7 +148,6 @@
             <i class="fas fa-map-marker-alt"></i> شرعب الرونة - المعشار - مقابل معرض الإخوة
         </div>
         
-        <!-- أرقام الواتساب والتيك توك -->
         <div class="contact-numbers-box">
             <a href="https://wa.me/967773269355" class="wa-pill" target="_blank">
                 <i class="fab fa-whatsapp"></i> واتساب (1): 773269355
@@ -257,7 +161,6 @@
         </div>
     </div>
 
-    <!-- تبويبات الأقسام -->
     <div class="nav-tabs">
         <button class="tab-btn active" onclick="switchCategory('wedding')">
             <i class="fas fa-ring"></i> مستلزمات الأفراح
@@ -267,9 +170,8 @@
         </button>
     </div>
 
-    <!-- شريط تحكم الأدمن (مع خروج وخروج نهائي) -->
     <div class="admin-bar" id="adminBar">
-        <span><i class="fas fa-shield-alt"></i> لوحة الإدارة الآمنة (حماية قصوى ضد 5 محاولات خطأ)</span>
+        <span><i class="fas fa-shield-alt"></i> لوحة الإدارة الآمنة (محمية ومنظمة)</span>
         <div style="display: flex; gap: 8px; flex-wrap: wrap;">
             <button class="tab-btn active" style="padding: 8px 16px; font-size: 0.85rem;" onclick="openAddModal()">+ إضافة منتج</button>
             <button class="tab-btn" style="padding: 8px 16px; font-size: 0.85rem; background: #f59e0b; color: white;" onclick="logout()">خروج عادي 🔒</button>
@@ -277,12 +179,10 @@
         </div>
     </div>
 
-    <!-- شبكة عرض المنتجات -->
     <div class="main-container">
         <div class="products-grid" id="productsGrid"></div>
     </div>
 
-    <!-- 3. الشاشة التعريفية الأولى (تظهر عند الدخول لأول مرة وتكون قابلة للإغلاق) -->
     <div class="modal-overlay active" id="welcomeIntroModal">
         <div class="modal-box" style="text-align: center;">
             <div style="font-size: 45px; color: var(--primary-sky); margin-bottom: 10px;">
@@ -296,7 +196,6 @@
         </div>
     </div>
 
-    <!-- نافذة تسجيل الدخول المحمية -->
     <div class="modal-overlay" id="loginModal">
         <div class="modal-box">
             <h3>تسجيل دخول الإدارة المحمي 🔒</h3>
@@ -306,7 +205,7 @@
                     <input type="text" id="loginUser" required autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <label>كلمة المرور (محدود بـ 5 محاولات أمان)</label>
+                    <label>كلمة المرور</label>
                     <input type="password" id="loginPass" required>
                 </div>
                 <button type="submit" class="btn-submit">دخول النظام</button>
@@ -315,7 +214,6 @@
         </div>
     </div>
 
-    <!-- نافذة إضافة وتعديل المنتجات -->
     <div class="modal-overlay" id="productModal">
         <div class="modal-box">
             <h3 id="modalTitle">إضافة منتج جديد</h3>
@@ -351,7 +249,8 @@
                     <textarea id="pDesc" rows="2"></textarea>
                 </div>
                 <div class="form-group">
-                    <label>صورة المنتج (استيعاب كامل ودعم رفع صور متعددة وبجودة عالية)</label>
+                    <label>صورة المنتج (من الكاميرا أو المعرض مباشره)</label>
+                    <!-- دعم التقاط الكاميرا أو المعرض بجودة عالية وبشكل مباشر -->
                     <input type="file" id="pImageFile" accept="image/*">
                 </div>
                 <button type="submit" class="btn-submit" id="submitBtn">حفظ ونشر</button>
@@ -360,13 +259,11 @@
         </div>
     </div>
 
-    <!-- إشعار الكبسولة العائمة -->
     <div class="toast-pill" id="toastPill">
         <i class="fas fa-check-circle" id="toastIcon"></i>
         <span id="toastMsg">تمت العملية بنجاح</span>
     </div>
 
-    <!-- الفوتر -->
     <footer>
         أهلاً بوجودكم.. وأفراحكم أجمل معنا <strong>مركز الأمجاد - شرعب الرونة</strong> | حماية فائقة بواسطة شبكة العز
     </footer>
@@ -453,7 +350,7 @@
             });
         }
 
-        /* نظام الدخول الغامض بـ 3 نقرات على الشعار */
+        /* نظام الدخول بـ 3 نقرات على الشعار */
         let clicks = 0;
         let timer = null;
         document.getElementById('secretLogoBtn').onclick = () => {
@@ -496,7 +393,7 @@
                     closeModals();
                     showToast('تم تسجيل الدخول بنجاح وتفعيل لوحة الإدارة 🔓');
                 } else {
-                    showToast(data.message || 'بيانات الدخول غير صحيحة أو تم تجاوز الحد (5 محاولات)', true);
+                    showToast(data.message || 'بيانات الدخول غير صحيحة', true);
                 }
             } catch(e) {
                 showToast('خطأ في الاتصال بالخادم', true);
@@ -541,6 +438,48 @@
             document.getElementById('productModal').classList.add('active');
         }
 
+        /* دالة ضغط الصور التلقائية الاحترافية قبل الإرسال */
+        function compressAndResizeImage(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.src = event.target.result;
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        const MAX_WIDTH = 1000;
+                        const MAX_HEIGHT = 1000;
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > height) {
+                            if (width > MAX_WIDTH) {
+                                height *= MAX_WIDTH / width;
+                                width = MAX_WIDTH;
+                            }
+                        } else {
+                            if (height > MAX_HEIGHT) {
+                                width *= MAX_HEIGHT / height;
+                                height = MAX_HEIGHT;
+                            }
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+                        
+                        // ضغط الجودة إلى 0.75 وتصديرها بصيغة JPEG الخفيفة والواضحة
+                        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.75);
+                        resolve(compressedBase64);
+                    };
+                    img.onerror = (err) => reject(err);
+                };
+                reader.onerror = (err) => reject(err);
+            });
+        }
+
         document.getElementById('productForm').onsubmit = async (e) => {
             e.preventDefault();
             const id = document.getElementById('pId').value;
@@ -549,15 +488,17 @@
             const price = document.getElementById('pPrice').value;
             const currency = document.getElementById('pCurr').value;
             const description = document.getElementById('pDesc').value;
-            const file = document.getElementById('pImageFile').files[0];
+            const fileInput = document.getElementById('pImageFile').files[0];
 
             let image = null;
-            if(file) {
-                image = await new Promise(r => {
-                    const reader = new FileReader();
-                    reader.onload = ev => r(ev.target.result);
-                    reader.readAsDataURL(file);
-                });
+            if(fileInput) {
+                showToast('جاري ضغط ومعالجة الصورة...');
+                try {
+                    image = await compressAndResizeImage(fileInput);
+                } catch (err) {
+                    showToast('خطأ في معالجة الصورة، جرب صورة أخرى', true);
+                    return;
+                }
             }
 
             const body = { category, title, price, currency, description };
@@ -575,15 +516,22 @@
                     },
                     body: JSON.stringify(body)
                 });
+
                 if(res.ok) {
                     closeModals();
                     showToast(id ? 'تم تعديل المنتج بنجاح' : 'تمت إضافة المنتج ونشره بنجاح');
                     fetchProducts();
+                } else if(res.status === 401 || res.status === 403) {
+                    showToast('انتهت جلسة الدخول، أعد تسجيل الدخول من جديد', true);
+                    token = '';
+                    localStorage.removeItem('token');
+                    document.body.classList.remove('admin-auth');
+                    document.getElementById('adminBar').classList.remove('active');
                 } else {
-                    showToast('فشلت العملية، تأكد من صلاحيات تسجيل الدخول', true);
+                    showToast('فشلت العملية، تأكد من البيانات', true);
                 }
             } catch(e) {
-                showToast('خطأ في حفظ البيانات', true);
+                showToast('خطأ في حفظ البيانات عبر الشبكة', true);
             }
         };
 
@@ -597,6 +545,8 @@
                 if(res.ok) {
                     showToast('تم حذف المنتج بنجاح');
                     fetchProducts();
+                } else if(res.status === 401 || res.status === 403) {
+                    showToast('انتهت الجلسة، سجل دخولك مرة أخرى', true);
                 }
             } catch(e) {
                 showToast('خطأ أثناء عملية الحذف', true);
