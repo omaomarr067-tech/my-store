@@ -11,31 +11,22 @@ const app = express();
 const JWT_SECRET = process.env.JWT_SECRET || 'amjad_ultimate_secure_key_2026';
 const PORT = process.env.PORT || 3000;
 
-// تفعيل حماية الرؤوس والأمان السيبراني
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// نظام الحماية المتقدم ضد القوة الغاشمة وحجب الخدمة (DDoS / Brute-force Protection)
-const securityLimiter = rateLimit({
-    windowMs: 10 * 60 * 1000, // 10 دقائق
-    max: 100, // الحد الأقصى للطلبات لكل آي بي
-    message: { error: 'تم تجاوز الحد المسموح من الطلبات، تم حماية الخادم مؤقتاً.' }
-});
-
+// حماية صارمة ضد هجمات القوة الغاشمة وتخمني كلمة المرور (أقصى حد 5 محاولات)
 const loginLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    max: 5, // 5 محاولات فقط لتسجيل الدخول لحماية حساب الأدمن
-    message: { error: 'محاولات دخول متكررة خاطئة، تم حظر الحساب مؤقتاً لحماية النظام.' }
+    max: 5,
+    message: { error: 'تم تجاوز الحد المسموح لمحاولات الدخول. تم حظر الطلبات مؤقتاً لحماية النظام.' }
 });
-
-app.use('/api/', securityLimiter);
 
 const db = new sqlite3.Database('./database.db', (err) => {
     if (err) console.error('خطأ قاعدة البيانات:', err);
-    else console.log('تم الاتصال بقاعدة البيانات المشفرة بنجاح.');
+    else console.log('تم الاتصال بقاعدة البيانات بنجاح.');
 });
 
 db.serialize(async () => {
@@ -68,16 +59,15 @@ db.serialize(async () => {
 function authMiddleware(req, res, next) {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
-    if (!token) return res.status(401).json({ error: 'غير مصرح بالدخول - يتطلب صلاحيات الإدارة' });
+    if (!token) return res.status(401).json({ error: 'غير مصرح - يرجى تسجيل الدخول' });
 
     jwt.verify(token, JWT_SECRET, (err, user) => {
-        if (err) return res.status(403).json({ error: 'جلسة العمل منتهية أو غير صالحة' });
+        if (err) return res.status(403).json({ error: 'انتهت صلاحية الجلسة، أعد تسجيل الدخول' });
         req.user = user;
         next();
     });
 }
 
-// جلب المنتجات
 app.get('/api/products', (req, res) => {
     db.all('SELECT * FROM products ORDER BY id DESC', [], (err, rows) => {
         if (err) return res.status(500).json({ error: err.message });
@@ -85,7 +75,6 @@ app.get('/api/products', (req, res) => {
     });
 });
 
-// تسجيل الدخول مع الحماية القصوى
 app.post('/api/login', loginLimiter, (req, res) => {
     const { username, password } = req.body;
     db.get('SELECT * FROM users WHERE username = ?', [username], async (err, user) => {
@@ -99,7 +88,6 @@ app.post('/api/login', loginLimiter, (req, res) => {
     });
 });
 
-// إضافة منتج
 app.post('/api/products', authMiddleware, (req, res) => {
     const { title, description, price, currency, category, image, available } = req.body;
     db.run(
@@ -112,7 +100,6 @@ app.post('/api/products', authMiddleware, (req, res) => {
     );
 });
 
-// تعديل منتج
 app.put('/api/products/:id', authMiddleware, (req, res) => {
     const { title, description, price, currency, category, image } = req.body;
     const { id } = req.params;
@@ -129,7 +116,6 @@ app.put('/api/products/:id', authMiddleware, (req, res) => {
     });
 });
 
-// حذف منتج
 app.delete('/api/products/:id', authMiddleware, (req, res) => {
     db.run('DELETE FROM products WHERE id = ?', [req.params.id], function(err) {
         if (err) return res.status(500).json({ error: err.message });
