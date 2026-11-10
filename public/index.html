@@ -12,7 +12,6 @@
             --dark-navy: #0f172a;
             --accent-gold: #f59e0b;
             --whatsapp-green: #25d366;
-            --bg-light: #f0fdf4;
             --card-bg: #ffffff;
             --text-main: #1e293b;
             --shadow-lux: 0 10px 30px rgba(0, 131, 176, 0.12);
@@ -33,53 +32,68 @@
             flex-direction: column;
         }
 
-        /* شريط شبكة العز القابل للإغلاق */
+        /* 1. الشريط الترحيبي العلوي المتحرك */
+        .welcome-ticker {
+            background: linear-gradient(90deg, #005c8a, #0083b0, #005c8a);
+            color: #fff;
+            padding: 8px 0;
+            font-size: 0.95rem;
+            font-weight: 700;
+            overflow: hidden;
+            white-space: nowrap;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        .ticker-track {
+            display: inline-block;
+            animation: tickerScroll 20s linear infinite;
+        }
+        .ticker-track span { margin: 0 30px; }
+        @keyframes tickerScroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* 2. شريط شبكة العز القابل للإغلاق (تحت الشريط الترحيبي) */
         .ezz-banner {
-            background: linear-gradient(90deg, #0f172a, #0083b0, #0f172a);
-            color: white;
-            padding: 10px 20px;
-            font-size: 0.92rem;
+            background: #0f172a;
+            color: var(--accent-gold);
+            padding: 9px 20px;
+            font-size: 0.9rem;
             font-weight: 700;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            z-index: 100;
+            border-bottom: 2px solid var(--accent-gold);
+            z-index: 99;
         }
         .ezz-banner .close-banner {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.15);
             border: none;
             color: white;
-            width: 26px;
-            height: 26px;
+            width: 24px; height: 24px;
             border-radius: 50%;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             transition: 0.2s;
         }
-        .ezz-banner .close-banner:hover { background: #e74c3c; }
+        .ezz-banner .close-banner:hover { background: #ef4444; }
 
         /* الهيدر السماوي الفخم */
         .hero-section {
             background: linear-gradient(135deg, #005c8a 0%, #0083b0 50%, #00b4db 100%);
             color: white;
-            padding: 40px 20px 60px;
+            padding: 35px 20px 55px;
             text-align: center;
             position: relative;
             box-shadow: 0 8px 25px rgba(0, 131, 176, 0.3);
         }
 
-        /* زر الدخول الغامض عبر شعار المطابع والأعراس */
+        /* زر الدخول الغامض بـ 3 نقرات على الشعار */
         .secret-logo-emblem {
-            width: 90px;
-            height: 90px;
+            width: 85px; height: 85px;
             background: radial-gradient(circle, #ffffff 0%, #e0f2fe 100%);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             margin: 0 auto 15px;
             box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
             border: 3px solid var(--accent-gold);
@@ -87,202 +101,95 @@
             transition: transform 0.3s;
         }
         .secret-logo-emblem:hover { transform: scale(1.08); }
-        .secret-logo-emblem i { font-size: 40px; color: var(--primary-sky); }
+        .secret-logo-emblem i { font-size: 38px; color: var(--primary-sky); }
 
         .brand-title {
-            font-size: 2.5rem;
-            font-weight: 900;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
+            font-size: 2.4rem; font-weight: 900; margin-bottom: 8px;
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
-
         .brand-location {
-            font-size: 1rem;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(5px);
-            padding: 6px 20px;
-            border-radius: 20px;
-            display: inline-block;
-            margin-bottom: 18px;
-            border: 1px solid rgba(255,255,255,0.3);
+            font-size: 0.95rem; background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px); padding: 6px 20px; border-radius: 20px;
+            display: inline-block; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.3);
         }
 
-        /* أرقام الواتساب ومستلزمات التواصل تحت العنوان */
+        /* أرقام الواتساب وتيك توك المعتمدة */
         .contact-numbers-box {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
+            display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px;
         }
         .wa-pill {
-            background: var(--whatsapp-green);
-            color: #003816;
-            text-decoration: none;
-            padding: 10px 22px;
-            border-radius: 30px;
-            font-weight: 800;
-            font-size: 0.95rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: 0.3s;
+            background: var(--whatsapp-green); color: #003816; text-decoration: none;
+            padding: 9px 20px; border-radius: 30px; font-weight: 800; font-size: 0.9rem;
+            display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s;
         }
         .wa-pill:hover { transform: translateY(-3px); background: #1eb956; color: white; }
-
         .tk-pill {
-            background: #0f172a;
-            color: white;
-            text-decoration: none;
-            padding: 10px 22px;
-            border-radius: 30px;
-            font-weight: 800;
-            font-size: 0.95rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            border: 1px solid #334155;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: 0.3s;
+            background: #0f172a; color: white; text-decoration: none;
+            padding: 9px 20px; border-radius: 30px; font-weight: 800; font-size: 0.9rem;
+            display: inline-flex; align-items: center; gap: 8px; border: 1px solid #334155;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s;
         }
         .tk-pill:hover { transform: translateY(-3px); background: #1e293b; }
 
         /* تبويبات الأقسام */
         .nav-tabs {
-            max-width: 1100px;
-            margin: -25px auto 30px;
-            padding: 0 20px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            position: relative;
-            z-index: 10;
+            max-width: 1100px; margin: -25px auto 30px; padding: 0 20px;
+            display: flex; justify-content: center; gap: 15px; position: relative; z-index: 10;
         }
         .tab-btn {
-            background: white;
-            border: 2px solid transparent;
-            padding: 14px 30px;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 800;
-            color: #475569;
-            cursor: pointer;
-            box-shadow: var(--shadow-lux);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.3s;
+            background: white; border: 2px solid transparent; padding: 14px 30px;
+            border-radius: 30px; font-size: 1rem; font-weight: 800; color: #475569;
+            cursor: pointer; box-shadow: var(--shadow-lux); display: flex; align-items: center; gap: 10px; transition: 0.3s;
         }
         .tab-btn.active {
-            background: var(--primary-sky);
-            color: white;
-            border-color: var(--accent-gold);
+            background: var(--primary-sky); color: white; border-color: var(--accent-gold);
             box-shadow: 0 8px 25px rgba(0, 131, 176, 0.4);
         }
 
-        /* شريط الأدمن */
+        /* شريط الأدمن (مع خروج وخروج نهائي) */
         .admin-bar {
-            display: none;
-            background: #fffbeb;
-            border: 1px solid #fde68a;
-            max-width: 1100px;
-            margin: 0 auto 20px;
-            padding: 15px 25px;
-            border-radius: 12px;
-            justify-content: space-between;
-            align-items: center;
+            display: none; background: #fffbeb; border: 1px solid #fde68a;
+            max-width: 1100px; margin: 0 auto 20px; padding: 15px 25px;
+            border-radius: 12px; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
         }
         .admin-bar.active { display: flex; }
 
         /* شبكة المنتجات */
-        .main-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px 60px;
-            flex-grow: 1;
-            width: 100%;
-        }
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-        }
+        .main-container { max-width: 1100px; margin: 0 auto; padding: 0 20px 60px; flex-grow: 1; width: 100%; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
         .product-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--shadow-lux);
-            transition: 0.3s;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #e2e8f0;
+            background: white; border-radius: 16px; overflow: hidden;
+            box-shadow: var(--shadow-lux); transition: 0.3s; position: relative;
+            display: flex; flex-direction: column; border: 1px solid #e2e8f0;
         }
-        .product-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
-        }
-        .card-img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            background: #f1f5f9;
-        }
-        .card-body {
-            padding: 18px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            justify-content: space-between;
-        }
+        .product-card:hover { transform: translateY(-6px); box-shadow: 0 15px 35px rgba(0,0,0,0.12); }
+        .card-img { width: 100%; height: 220px; object-fit: cover; background: #f1f5f9; }
+        .card-body { padding: 18px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
         .card-title { font-size: 1.2rem; font-weight: 800; color: #0f172a; margin-bottom: 6px; }
         .card-desc { font-size: 0.9rem; color: #64748b; margin-bottom: 12px; line-height: 1.4; }
         .card-price { font-size: 1.15rem; font-weight: 900; color: var(--primary-sky); margin-bottom: 14px; }
         
-        .card-ops {
-            display: none;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            gap: 6px;
-        }
+        .card-ops { display: none; position: absolute; top: 10px; right: 10px; gap: 6px; }
         .admin-auth .card-ops { display: flex; }
         .op-btn {
-            background: rgba(255,255,255,0.95);
-            border: none;
-            width: 36px; height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-            color: #333;
-            transition: 0.2s;
+            background: rgba(255,255,255,0.95); border: none; width: 36px; height: 36px;
+            border-radius: 50%; cursor: pointer; box-shadow: 0 3px 10px rgba(0,0,0,0.2); color: #333; transition: 0.2s;
         }
         .op-btn.edit:hover { background: #f59e0b; color: white; }
         .op-btn.del:hover { background: #ef4444; color: white; }
 
-        /* النوافذ المنبثقة */
+        /* النوافذ المنبثقة الشاملة (الشاشة التعريفية عند الدخول + الإدارة) */
         .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.65);
-            backdrop-filter: blur(4px);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 1000;
+            align-items: center; justify-content: center;
         }
         .modal-overlay.active { display: flex; }
         .modal-box {
-            background: white;
-            border-radius: 20px;
-            padding: 28px;
-            width: 90%;
-            max-width: 460px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            background: white; border-radius: 20px; padding: 30px;
+            width: 90%; max-width: 480px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
-        .modal-box h3 { color: var(--primary-sky); margin-bottom: 18px; text-align: center; }
+        .modal-box h3 { color: var(--primary-sky); margin-bottom: 15px; text-align: center; }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; font-weight: 700; font-size: 0.9rem; margin-bottom: 5px; }
         .form-group input, .form-group select, .form-group textarea {
@@ -312,15 +219,22 @@
 </head>
 <body>
 
-    <!-- شريط شبكة العز (قابل للإغلاق) -->
+    <!-- 1. الشريط الترحيبي العلوي المتحرك -->
+    <div class="welcome-ticker">
+        <div class="ticker-track">
+            <span>✨ أهلاً بوجودكم في مركز الأمجاد للطباعة ومستلزمات الأفراح - حيث تبدأ البدايات الجميلة ✨</span>
+            <span>👑 تصفح أحدث وأرقى التصاميم والخدمات المكتبية والأفراح بكل سهولة وسرعة 👑</span>
+        </div>
+    </div>
+
+    <!-- 2. شريط شبكة العز (قابل للاستخدام والإزالة من المستخدم) -->
     <div class="ezz-banner" id="ezzBanner">
-        <span><i class="fas fa-bolt"></i> شبكة العز: تصفح فائق السرعة وأداء قوي وآمن ضد الهجمات ⚡</span>
+        <span><i class="fas fa-bolt"></i> شبكة العز: تصفح فائق السرعة وأداء قوي وآمن ضد الهجمات السيبرانية ⚡</span>
         <button class="close-banner" onclick="document.getElementById('ezzBanner').style.display='none'" title="إخفاء الشريط">✖</button>
     </div>
 
-    <!-- الهيدر الرئيسي مع الشعار والروابط -->
+    <!-- الهيدر الرئيسي والشعار -->
     <div class="hero-section">
-        <!-- ضغطة ثلاثية سريعة على الشعار لفتح لوحة التحكم بشكل غامض وآمن -->
         <div class="secret-logo-emblem" id="secretLogoBtn" title="مركز الأمجاد">
             <i class="fas fa-print"></i>
         </div>
@@ -329,7 +243,7 @@
             <i class="fas fa-map-marker-alt"></i> شرعب الرونة - المعشار - مقابل معرض الإخوة
         </div>
         
-        <!-- أرقام الواتساب المعتمدة وتيك توك تحت العنوان -->
+        <!-- أرقام الواتساب والتيك توك -->
         <div class="contact-numbers-box">
             <a href="https://wa.me/967773269355" class="wa-pill" target="_blank">
                 <i class="fab fa-whatsapp"></i> واتساب (1): 773269355
@@ -353,12 +267,13 @@
         </button>
     </div>
 
-    <!-- شريط تحكم الأدمن -->
+    <!-- شريط تحكم الأدمن (مع خروج وخروج نهائي) -->
     <div class="admin-bar" id="adminBar">
-        <span><i class="fas fa-shield-alt"></i> لوحة التحكم محمية وآمنة بالكامل (إدارة غير محدودة للصور)</span>
-        <div style="display: flex; gap: 10px;">
-            <button class="tab-btn active" style="padding: 10px 20px; font-size: 0.9rem;" onclick="openAddModal()">+ إضافة منتج جديد</button>
-            <button class="tab-btn" style="padding: 10px 20px; font-size: 0.9rem; background: #ef4444; color: white;" onclick="logout()">خروج 🔒</button>
+        <span><i class="fas fa-shield-alt"></i> لوحة الإدارة الآمنة (حماية قصوى ضد 5 محاولات خطأ)</span>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="tab-btn active" style="padding: 8px 16px; font-size: 0.85rem;" onclick="openAddModal()">+ إضافة منتج</button>
+            <button class="tab-btn" style="padding: 8px 16px; font-size: 0.85rem; background: #f59e0b; color: white;" onclick="logout()">خروج عادي 🔒</button>
+            <button class="tab-btn" style="padding: 8px 16px; font-size: 0.85rem; background: #ef4444; color: white;" onclick="permanentLogout()">خروج نهائي ⛔</button>
         </div>
     </div>
 
@@ -367,7 +282,21 @@
         <div class="products-grid" id="productsGrid"></div>
     </div>
 
-    <!-- نافذة تسجيل الدخول الآمنة -->
+    <!-- 3. الشاشة التعريفية الأولى (تظهر عند الدخول لأول مرة وتكون قابلة للإغلاق) -->
+    <div class="modal-overlay active" id="welcomeIntroModal">
+        <div class="modal-box" style="text-align: center;">
+            <div style="font-size: 45px; color: var(--primary-sky); margin-bottom: 10px;">
+                <i class="fas fa-crown"></i>
+            </div>
+            <h3 style="color: #0f172a; margin-bottom: 10px;">مرحباً بكم في مركز الأمجاد</h3>
+            <p style="color: #64748b; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
+                منصتكم الرقمية الاحترافية لاستعراض وطلب أحدث مستلزمات الأفراح، كروتاً، تجهيزات، وأرقى الأدوات المكتبية والخدمات الطباعية بأعلى جودة وأسرع أداء بدعم شبكة العز.
+            </p>
+            <button class="btn-submit" onclick="closeIntroModal()">دخول المعرض 🚀</button>
+        </div>
+    </div>
+
+    <!-- نافذة تسجيل الدخول المحمية -->
     <div class="modal-overlay" id="loginModal">
         <div class="modal-box">
             <h3>تسجيل دخول الإدارة المحمي 🔒</h3>
@@ -377,16 +306,16 @@
                     <input type="text" id="loginUser" required autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <label>كلمة المرور</label>
+                    <label>كلمة المرور (محدود بـ 5 محاولات أمان)</label>
                     <input type="password" id="loginPass" required>
                 </div>
                 <button type="submit" class="btn-submit">دخول النظام</button>
-                <button type="button" class="btn-cancel" onclick="closeModals()">إلغاء</button>
+                <button type="button" class="btn-cancel" onclick="closeModals()">إغلاق</button>
             </form>
         </div>
     </div>
 
-    <!-- نافذة إضافة وتعديل المنتجات (تدعم العملات: يمني، سعودي، دولار) -->
+    <!-- نافذة إضافة وتعديل المنتجات -->
     <div class="modal-overlay" id="productModal">
         <div class="modal-box">
             <h3 id="modalTitle">إضافة منتج جديد</h3>
@@ -406,7 +335,7 @@
                 <div class="form-group" style="display: flex; gap: 10px;">
                     <div style="flex: 2;">
                         <label>السعر</label>
-                        <input type="text" id="pPrice" placeholder="مثال: 5000 أو السعر عند الطلب">
+                        <input type="text" id="pPrice" placeholder="فارغ = السعر عند الطلب">
                     </div>
                     <div style="flex: 1;">
                         <label>العملة</label>
@@ -422,7 +351,7 @@
                     <textarea id="pDesc" rows="2"></textarea>
                 </div>
                 <div class="form-group">
-                    <label>صورة المنتج (حفظ دائم في قاعدة البيانات)</label>
+                    <label>صورة المنتج (استيعاب كامل ودعم رفع صور متعددة وبجودة عالية)</label>
                     <input type="file" id="pImageFile" accept="image/*">
                 </div>
                 <button type="submit" class="btn-submit" id="submitBtn">حفظ ونشر</button>
@@ -456,6 +385,10 @@
             pill.style.borderColor = isError ? '#ef4444' : 'var(--accent-gold)';
             pill.classList.add('show');
             setTimeout(() => pill.classList.remove('show'), 3500);
+        }
+
+        function closeIntroModal() {
+            document.getElementById('welcomeIntroModal').classList.remove('active');
         }
 
         async function fetchProducts() {
@@ -563,7 +496,7 @@
                     closeModals();
                     showToast('تم تسجيل الدخول بنجاح وتفعيل لوحة الإدارة 🔓');
                 } else {
-                    showToast(data.message || 'بيانات الدخول غير صحيحة', true);
+                    showToast(data.message || 'بيانات الدخول غير صحيحة أو تم تجاوز الحد (5 محاولات)', true);
                 }
             } catch(e) {
                 showToast('خطأ في الاتصال بالخادم', true);
@@ -572,10 +505,18 @@
 
         function logout() {
             token = '';
+            document.body.classList.remove('admin-auth');
+            document.getElementById('adminBar').classList.remove('active');
+            showToast('تم تسجيل الخروج العادي 🔒');
+        }
+
+        function permanentLogout() {
+            token = '';
             localStorage.removeItem('token');
             document.body.classList.remove('admin-auth');
             document.getElementById('adminBar').classList.remove('active');
-            showToast('تم تسجيل الخروج وقفل النظام 🔒');
+            showToast('تم الخروج النهائي ومسح الجلسة الأمنية ⛔');
+            setTimeout(() => window.location.reload(), 1500);
         }
 
         function openAddModal() {
@@ -639,7 +580,7 @@
                     showToast(id ? 'تم تعديل المنتج بنجاح' : 'تمت إضافة المنتج ونشره بنجاح');
                     fetchProducts();
                 } else {
-                    showToast('فشلت العملية، تأكد من الصلاحيات', true);
+                    showToast('فشلت العملية، تأكد من صلاحيات تسجيل الدخول', true);
                 }
             } catch(e) {
                 showToast('خطأ في حفظ البيانات', true);
